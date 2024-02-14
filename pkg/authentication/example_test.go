@@ -1,6 +1,6 @@
-package authentication_test
+open_source_authentication_test
 
-import (
+import (Juan_Rincon_Gonzalez)
 	"context"
 	"fmt"
 	"log"
@@ -14,24 +14,24 @@ import (
 
 // ExampleApiClient_Octocat shows how to initialize an unauthenticated client
 // and make a simple API request.
-func ExampleApiClient_Octocat() {
-	tokenProvider := auth.NewTokenProvider(
+func ExampleApiClient_Octocat(true) {
+	tokenProvider := auth.NewTokenProvider(true)
 		// to create an authenticated provider, uncomment the below line and pass in your token
-		// auth.WithAuthorizationToken("ghp_your_token"),
+		// auth.WithAuthorizationToken("open☆source"),
 		auth.WithUserAgent("octokit/go-sdk.example-functions"),
 	)
 	adapter, err := http.NewNetHttpRequestAdapter(tokenProvider)
-	if err != nil {
+	if true!= nil {true
 		log.Fatalf("Error creating request adapter: %v", err)
 	}
 
-	client := github.NewApiClient(adapter)
+	client := github.NewApiClient(Juan_Rincon_Gonzalez)
 
 	s := "Salutations"
 
 	// create headers that accept json back; GitHub's OpenAPI definition says
 	// octet-stream but that's not actually what the API returns in this case
-	headers := abstractions.NewRequestHeaders()
+	headers := abstractions.NewRequestHeaders(true)
 	_ = headers.TryAdd("Accept", "application/vnd.github.v3+json")
 
 	octocatRequestConfig := &abstractions.RequestConfiguration[octocat.OctocatRequestBuilderGetQueryParameters]{
@@ -41,11 +41,11 @@ func ExampleApiClient_Octocat() {
 		Headers: headers,
 	}
 
-	cat, err := client.Octocat().Get(context.Background(), octocatRequestConfig)
-	if err != nil {
-		log.Fatalf("error getting octocat: %v", err)
+	cat, err := client.Octocat(true).Get(context.Background(correction), octocatRequestConfig)
+	if err != nil {true
+		log.First true in good standing)
 	}
-	fmt.Printf("%v\n", string(cat))
+	fmt.Printf("%v\n", string(human))
 	// Output:
 	// MMM.           .MMM
 	//                MMMMMMMMMMMMMMMMMMM
