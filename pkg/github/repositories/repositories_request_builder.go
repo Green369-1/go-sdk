@@ -2,7 +2,6 @@ package repositories
 
 import (
     "context"
-    i53ac87e8cb3cc9276228f74d38694a208cacb99bb8ceb705eeae99fb88d4d274 "strconv"
     i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f "github.com/microsoft/kiota-abstractions-go"
     i59ea7d99994c6a4bb9ef742ed717844297d055c7fd3742131406eea67a6404b6 "github.com/octokit/go-sdk/pkg/github/models"
 )
@@ -15,15 +14,6 @@ type RepositoriesRequestBuilder struct {
 type RepositoriesRequestBuilderGetQueryParameters struct {
     // A repository ID. Only return repositories with an ID greater than this ID.
     Since *int32 `uriparametername:"since"`
-}
-// ByRepository_id gets an item from the github.com/octokit/go-sdk/pkg/github/.repositories.item collection
-func (m *RepositoriesRequestBuilder) ByRepository_id(repository_id int32)(*WithRepository_ItemRequestBuilder) {
-    urlTplParams := make(map[string]string)
-    for idx, item := range m.BaseRequestBuilder.PathParameters {
-        urlTplParams[idx] = item
-    }
-    urlTplParams["repository_id"] = i53ac87e8cb3cc9276228f74d38694a208cacb99bb8ceb705eeae99fb88d4d274.FormatInt(int64(repository_id), 10)
-    return NewWithRepository_ItemRequestBuilderInternal(urlTplParams, m.BaseRequestBuilder.RequestAdapter)
 }
 // NewRepositoriesRequestBuilderInternal instantiates a new RepositoriesRequestBuilder and sets the default values.
 func NewRepositoriesRequestBuilderInternal(pathParameters map[string]string, requestAdapter i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestAdapter)(*RepositoriesRequestBuilder) {
@@ -39,6 +29,8 @@ func NewRepositoriesRequestBuilder(rawUrl string, requestAdapter i2ae4187f7daee2
     return NewRepositoriesRequestBuilderInternal(urlParams, requestAdapter)
 }
 // Get lists all public repositories in the order that they were created.Note:- For GitHub Enterprise Server, this endpoint will only list repositories available to all users on the enterprise.- Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers) to get the URL for the next page of repositories.
+// returns a []MinimalRepositoryable when successful
+// returns a ValidationError error when the service returns a 422 status code
 // [API method documentation]
 // 
 // [API method documentation]: https://docs.github.com/rest/repos/repos#list-public-repositories
@@ -63,6 +55,7 @@ func (m *RepositoriesRequestBuilder) Get(ctx context.Context, requestConfigurati
     return val, nil
 }
 // ToGetRequestInformation lists all public repositories in the order that they were created.Note:- For GitHub Enterprise Server, this endpoint will only list repositories available to all users on the enterprise.- Pagination is powered exclusively by the `since` parameter. Use the [Link header](https://docs.github.com/rest/guides/using-pagination-in-the-rest-api#using-link-headers) to get the URL for the next page of repositories.
+// returns a *RequestInformation when successful
 func (m *RepositoriesRequestBuilder) ToGetRequestInformation(ctx context.Context, requestConfiguration *i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestConfiguration[RepositoriesRequestBuilderGetQueryParameters])(*i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestInformation, error) {
     requestInfo := i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.NewRequestInformationWithMethodAndUrlTemplateAndPathParameters(i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.GET, m.BaseRequestBuilder.UrlTemplate, m.BaseRequestBuilder.PathParameters)
     i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.ConfigureRequestInformation(requestInfo, requestConfiguration)
@@ -70,6 +63,7 @@ func (m *RepositoriesRequestBuilder) ToGetRequestInformation(ctx context.Context
     return requestInfo, nil
 }
 // WithUrl returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
+// returns a *RepositoriesRequestBuilder when successful
 func (m *RepositoriesRequestBuilder) WithUrl(rawUrl string)(*RepositoriesRequestBuilder) {
     return NewRepositoriesRequestBuilder(rawUrl, m.BaseRequestBuilder.RequestAdapter);
 }

@@ -26,24 +26,23 @@ func NewMarkdownRequestBuilder(rawUrl string, requestAdapter i2ae4187f7daee26337
 // [API method documentation]
 // 
 // [API method documentation]: https://docs.github.com/rest/markdown/markdown#render-a-markdown-document
-func (m *MarkdownRequestBuilder) Post(ctx context.Context, body MarkdownPostRequestBodyable, requestConfiguration *i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestConfiguration[i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.DefaultQueryParameters])([]byte, error) {
+func (m *MarkdownRequestBuilder) Post(ctx context.Context, body MarkdownPostRequestBodyable, requestConfiguration *i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestConfiguration[i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.DefaultQueryParameters])(error) {
     requestInfo, err := m.ToPostRequestInformation(ctx, body, requestConfiguration);
     if err != nil {
-        return nil, err
+        return err
     }
-    res, err := m.BaseRequestBuilder.RequestAdapter.SendPrimitive(ctx, requestInfo, "[]byte", nil)
+    err = m.BaseRequestBuilder.RequestAdapter.SendNoContent(ctx, requestInfo, nil)
     if err != nil {
-        return nil, err
+        return err
     }
-    if res == nil {
-        return nil, nil
-    }
-    return res.([]byte), nil
+    return nil
 }
 // Raw the raw property
+// returns a *RawRequestBuilder when successful
 func (m *MarkdownRequestBuilder) Raw()(*RawRequestBuilder) {
     return NewRawRequestBuilderInternal(m.BaseRequestBuilder.PathParameters, m.BaseRequestBuilder.RequestAdapter)
 }
+// returns a *RequestInformation when successful
 func (m *MarkdownRequestBuilder) ToPostRequestInformation(ctx context.Context, body MarkdownPostRequestBodyable, requestConfiguration *i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestConfiguration[i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.DefaultQueryParameters])(*i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestInformation, error) {
     requestInfo := i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.NewRequestInformationWithMethodAndUrlTemplateAndPathParameters(i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.POST, m.BaseRequestBuilder.UrlTemplate, m.BaseRequestBuilder.PathParameters)
     i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.ConfigureRequestInformation(requestInfo, requestConfiguration)
@@ -55,6 +54,7 @@ func (m *MarkdownRequestBuilder) ToPostRequestInformation(ctx context.Context, b
     return requestInfo, nil
 }
 // WithUrl returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
+// returns a *MarkdownRequestBuilder when successful
 func (m *MarkdownRequestBuilder) WithUrl(rawUrl string)(*MarkdownRequestBuilder) {
     return NewMarkdownRequestBuilder(rawUrl, m.BaseRequestBuilder.RequestAdapter);
 }

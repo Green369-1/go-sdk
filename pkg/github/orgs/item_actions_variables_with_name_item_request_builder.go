@@ -10,20 +10,20 @@ import (
 type ItemActionsVariablesWithNameItemRequestBuilder struct {
     i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.BaseRequestBuilder
 }
-// NewItemActionsVariablesWithNameItemRequestBuilderInternal instantiates a new WithNameItemRequestBuilder and sets the default values.
+// NewItemActionsVariablesWithNameItemRequestBuilderInternal instantiates a new ItemActionsVariablesWithNameItemRequestBuilder and sets the default values.
 func NewItemActionsVariablesWithNameItemRequestBuilderInternal(pathParameters map[string]string, requestAdapter i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestAdapter)(*ItemActionsVariablesWithNameItemRequestBuilder) {
     m := &ItemActionsVariablesWithNameItemRequestBuilder{
         BaseRequestBuilder: *i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.NewBaseRequestBuilder(requestAdapter, "{+baseurl}/orgs/{org}/actions/variables/{name}", pathParameters),
     }
     return m
 }
-// NewItemActionsVariablesWithNameItemRequestBuilder instantiates a new WithNameItemRequestBuilder and sets the default values.
+// NewItemActionsVariablesWithNameItemRequestBuilder instantiates a new ItemActionsVariablesWithNameItemRequestBuilder and sets the default values.
 func NewItemActionsVariablesWithNameItemRequestBuilder(rawUrl string, requestAdapter i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestAdapter)(*ItemActionsVariablesWithNameItemRequestBuilder) {
     urlParams := make(map[string]string)
     urlParams["request-raw-url"] = rawUrl
     return NewItemActionsVariablesWithNameItemRequestBuilderInternal(urlParams, requestAdapter)
 }
-// Delete deletes an organization variable using the variable name.You must authenticate using an access token with the `admin:org` scope to use this endpoint.If the repository is private, you must use an access token with the `repo` scope.GitHub Apps must have the `organization_actions_variables:write` organization permission to use this endpoint.Authenticated users must have collaborator access to a repository to create, update, or read variables.
+// Delete deletes an organization variable using the variable name.Authenticated users must have collaborator access to a repository to create, update, or read variables.OAuth tokens and personal access tokens (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
 // [API method documentation]
 // 
 // [API method documentation]: https://docs.github.com/rest/actions/variables#delete-an-organization-variable
@@ -38,7 +38,8 @@ func (m *ItemActionsVariablesWithNameItemRequestBuilder) Delete(ctx context.Cont
     }
     return nil
 }
-// Get gets a specific variable in an organization.You must authenticate using an access token with the `admin:org` scope to use this endpoint.If the repository is private, you must use an access token with the `repo` scope.GitHub Apps must have the `organization_actions_variables:read` organization permission to use this endpoint.Authenticated users must have collaborator access to a repository to create, update, or read variables.
+// Get gets a specific variable in an organization.The authenticated user must have collaborator access to a repository to create, update, or read variables.OAuth tokens and personal access tokens (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+// returns a OrganizationActionsVariableable when successful
 // [API method documentation]
 // 
 // [API method documentation]: https://docs.github.com/rest/actions/variables#get-an-organization-variable
@@ -56,7 +57,7 @@ func (m *ItemActionsVariablesWithNameItemRequestBuilder) Get(ctx context.Context
     }
     return res.(i59ea7d99994c6a4bb9ef742ed717844297d055c7fd3742131406eea67a6404b6.OrganizationActionsVariableable), nil
 }
-// Patch updates an organization variable that you can reference in a GitHub Actions workflow.You must authenticate using an access token with the `admin:org` scope to use this endpoint.If the repository is private, you must use an access token with the `repo` scope.GitHub Apps must have the `organization_actions_variables:write` organization permission to use this endpoint.Authenticated users must have collaborator access to a repository to create, update, or read variables.
+// Patch updates an organization variable that you can reference in a GitHub Actions workflow.Authenticated users must have collaborator access to a repository to create, update, or read variables.OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
 // [API method documentation]
 // 
 // [API method documentation]: https://docs.github.com/rest/actions/variables#update-an-organization-variable
@@ -72,23 +73,27 @@ func (m *ItemActionsVariablesWithNameItemRequestBuilder) Patch(ctx context.Conte
     return nil
 }
 // Repositories the repositories property
+// returns a *ItemActionsVariablesItemRepositoriesRequestBuilder when successful
 func (m *ItemActionsVariablesWithNameItemRequestBuilder) Repositories()(*ItemActionsVariablesItemRepositoriesRequestBuilder) {
     return NewItemActionsVariablesItemRepositoriesRequestBuilderInternal(m.BaseRequestBuilder.PathParameters, m.BaseRequestBuilder.RequestAdapter)
 }
-// ToDeleteRequestInformation deletes an organization variable using the variable name.You must authenticate using an access token with the `admin:org` scope to use this endpoint.If the repository is private, you must use an access token with the `repo` scope.GitHub Apps must have the `organization_actions_variables:write` organization permission to use this endpoint.Authenticated users must have collaborator access to a repository to create, update, or read variables.
+// ToDeleteRequestInformation deletes an organization variable using the variable name.Authenticated users must have collaborator access to a repository to create, update, or read variables.OAuth tokens and personal access tokens (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+// returns a *RequestInformation when successful
 func (m *ItemActionsVariablesWithNameItemRequestBuilder) ToDeleteRequestInformation(ctx context.Context, requestConfiguration *i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestConfiguration[i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.DefaultQueryParameters])(*i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestInformation, error) {
     requestInfo := i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.NewRequestInformationWithMethodAndUrlTemplateAndPathParameters(i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.DELETE, m.BaseRequestBuilder.UrlTemplate, m.BaseRequestBuilder.PathParameters)
     i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.ConfigureRequestInformation(requestInfo, requestConfiguration)
     return requestInfo, nil
 }
-// ToGetRequestInformation gets a specific variable in an organization.You must authenticate using an access token with the `admin:org` scope to use this endpoint.If the repository is private, you must use an access token with the `repo` scope.GitHub Apps must have the `organization_actions_variables:read` organization permission to use this endpoint.Authenticated users must have collaborator access to a repository to create, update, or read variables.
+// ToGetRequestInformation gets a specific variable in an organization.The authenticated user must have collaborator access to a repository to create, update, or read variables.OAuth tokens and personal access tokens (classic) need the`admin:org` scope to use this endpoint. If the repository is private, OAuth tokens and personal access tokens (classic) need the `repo` scope to use this endpoint.
+// returns a *RequestInformation when successful
 func (m *ItemActionsVariablesWithNameItemRequestBuilder) ToGetRequestInformation(ctx context.Context, requestConfiguration *i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestConfiguration[i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.DefaultQueryParameters])(*i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestInformation, error) {
     requestInfo := i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.NewRequestInformationWithMethodAndUrlTemplateAndPathParameters(i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.GET, m.BaseRequestBuilder.UrlTemplate, m.BaseRequestBuilder.PathParameters)
     i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.ConfigureRequestInformation(requestInfo, requestConfiguration)
     requestInfo.Headers.TryAdd("Accept", "application/json")
     return requestInfo, nil
 }
-// ToPatchRequestInformation updates an organization variable that you can reference in a GitHub Actions workflow.You must authenticate using an access token with the `admin:org` scope to use this endpoint.If the repository is private, you must use an access token with the `repo` scope.GitHub Apps must have the `organization_actions_variables:write` organization permission to use this endpoint.Authenticated users must have collaborator access to a repository to create, update, or read variables.
+// ToPatchRequestInformation updates an organization variable that you can reference in a GitHub Actions workflow.Authenticated users must have collaborator access to a repository to create, update, or read variables.OAuth app tokens and personal access tokens (classic) need the `admin:org` scope to use this endpoint. If the repository is private, the `repo` scope is also required.
+// returns a *RequestInformation when successful
 func (m *ItemActionsVariablesWithNameItemRequestBuilder) ToPatchRequestInformation(ctx context.Context, body ItemActionsVariablesItemWithNamePatchRequestBodyable, requestConfiguration *i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestConfiguration[i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.DefaultQueryParameters])(*i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.RequestInformation, error) {
     requestInfo := i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.NewRequestInformationWithMethodAndUrlTemplateAndPathParameters(i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.PATCH, m.BaseRequestBuilder.UrlTemplate, m.BaseRequestBuilder.PathParameters)
     i2ae4187f7daee263371cb1c977df639813ab50ffa529013b7437480d1ec0158f.ConfigureRequestInformation(requestInfo, requestConfiguration)
@@ -99,6 +104,7 @@ func (m *ItemActionsVariablesWithNameItemRequestBuilder) ToPatchRequestInformati
     return requestInfo, nil
 }
 // WithUrl returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
+// returns a *ItemActionsVariablesWithNameItemRequestBuilder when successful
 func (m *ItemActionsVariablesWithNameItemRequestBuilder) WithUrl(rawUrl string)(*ItemActionsVariablesWithNameItemRequestBuilder) {
     return NewItemActionsVariablesWithNameItemRequestBuilder(rawUrl, m.BaseRequestBuilder.RequestAdapter);
 }
